@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FindUserQuery {
+  id: Int!
+  firstName: String!
+  lastName: String!
+}
+
+type Query {
+  findAll: [FindUserQuery!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): FindUserQuery!
+}
+
+input CreateUserInput {
+  id: Int!
+  firstName: String!
+  lastName: String!
+}
