@@ -17,6 +17,11 @@ export class UsersResolver {
     return this.usersService.create(input);
   }
 
+  @Mutation(() => FindUserQuery, { name: 'loginUser'})
+  async loginUser(@Args('data') input: CreateUserInput){
+    return this.usersService.create(input);
+  }
+
   @Query(() => [FindUserQuery])
   findAll() {
     return this.usersService.findAll();

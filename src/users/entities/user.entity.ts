@@ -1,13 +1,47 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Table,
+  Column,
+  Model,
+  Unique,
+  IsEmail,
+  DataType,
+  CreatedAt,
+  UpdatedAt,
+  DeletedAt,
+  HasMany,
+} from 'sequelize-typescript';
+import { Gender } from '../../shared/enum/gender';
 
-@ObjectType() 
-export class User {
-  @Field(type => Int)
-  id: number;
+@Table({
+  tableName: 'user',
+})
+export class User extends Model<User> {
+  @Column({
+      type: DataType.UUID,
+      defaultValue: DataType.UUIDV4,
+      primaryKey: true,
+  })
+  id: string;
 
-  @Field()
+  @Unique
+  @IsEmail
+  @Column
+  email: string;
+
+  @Column({ field: 'firstName' })
   firstName: string;
 
-  @Field()
+  @Column({ field: 'lastName' })
   lastName: string;
+
+  @Column({ type: DataType.ENUM(Gender.female, Gender.male) })
+  gender: Gender;
+
+  @CreatedAt
+  @Column({ field: 'createdAt' })
+  createdAt: Date;
+
+  @UpdatedAt
+  @Column({ field: 'updatedAt' })
+  updatedAt: Date;
 }
